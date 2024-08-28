@@ -6,7 +6,7 @@ Criterios de aceptación:
 
 * Debe ser posible añadir, actualizar, eliminar, ver y buscar productos del inventario. 
 
-* Debe ser posible ajustar el stock y notificar al empresario cuando un producto este agotado o este próximo a hacerlo. 
+* Debe ser posible ajustar el stock y notificar al gerente cuando un producto este agotado o este próximo a hacerlo. 
 
 * Debe ser posible crear órdenes de compra y procesar las órdenes de venta.
   
