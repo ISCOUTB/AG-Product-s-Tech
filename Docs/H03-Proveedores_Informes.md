@@ -4,7 +4,7 @@ para tener una visión clara del desempeño del inventario, los productos más v
 
 Criterios de aceptación:
 
-•	Debe ser posible añadir, actualizar, eliminar y ver la información de los proveedores.
-•	Debe ser posible generar informes sobre el inventario actual.
-•	Debe ser posible generar informes sobre las ventas y tendencias de los productos.
-•	Debe ser posible acceder al historial de transacciones por día.
+* Debe ser posible añadir, actualizar, eliminar y ver la información de los proveedores.
+* Debe ser posible generar informes sobre el inventario actual.
+* Debe ser posible generar informes sobre las ventas y tendencias de los productos.
+* Debe ser posible acceder al historial de transacciones por día.
