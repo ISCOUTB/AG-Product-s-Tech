@@ -4,7 +4,7 @@ Descripción: Como gerente de la tienda, quiero gestionar el inventario de produ
 
 Criterios de aceptación: 
 
-•	Debe ser posible añadir nuevos productos al inventario.
-•	Debe ser posible actualizar la información de productos existentes.
-•	Debe ser posible eliminar productos del inventario.
-•	Debe ser posible ver y buscar productos en el inventario.
+* Debe ser posible añadir nuevos productos al inventario.
+* Debe ser posible actualizar la información de productos existentes.
+* Debe ser posible eliminar productos del inventario.
+* Debe ser posible ver y buscar productos en el inventario.
