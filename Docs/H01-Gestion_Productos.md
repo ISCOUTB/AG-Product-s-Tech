@@ -1,17 +1,10 @@
 Título: Gestión de Inventario de Productos Tecnológicos. 
 
-Descripción: Como gerente de la tienda, quiero llevar un registro de los productos donde pueda gestionar el inventario, conocer el stock de la tienda, listar las órdenes de compra y encargos de los proveedores, para facilitar la gestión y control de los datos de la empresa, y así reducir pérdidas, optimizar las compras y mejorar la satisfacción del cliente.
+Descripción: Como gerente de la tienda, quiero gestionar el inventario de productos para que pueda añadir, actualizar, eliminar, ver y buscar productos fácilmente, y así mantener un control preciso del stock.
 
 Criterios de aceptación: 
 
-* Debe ser posible añadir, actualizar, eliminar, ver y buscar productos del inventario. 
-
-* Debe ser posible ajustar el stock y notificar al gerente cuando un producto este agotado o este próximo a hacerlo. 
-
-* Debe ser posible crear órdenes de compra y procesar las órdenes de venta.
-  
-* Debe ser posible añadir, actualizar, eliminar y ver los proveedores de los productos. 
-
-* Debe ser posible generar informes sobre el inventario, las ventas y las tendencias de los productos.
-
-* Debe ser posible acceder al historial de transacciones por día.
+•	Debe ser posible añadir nuevos productos al inventario.
+•	Debe ser posible actualizar la información de productos existentes.
+•	Debe ser posible eliminar productos del inventario.
+•	Debe ser posible ver y buscar productos en el inventario.
