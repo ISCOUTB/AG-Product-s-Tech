@@ -1,0 +1,188 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background-color: #e0e0e0;
+}
+
+h1 {
+    font-size: 40px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #bdbdbd;
+    border-radius: 10px 10px 0 0;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon-btn {
+    border: none;
+    cursor: pointer;
+}
+
+.gray-inicio {
+    width: auto; 
+    padding: 10px 20px; 
+    background-color: #ccc; 
+    color: #000000; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    margin-right: 20px; 
+}
+
+.red-circle {
+    width: 50px;
+    height: 40px;
+    background-color: #E23636;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.gray-square {
+    width: 50px;
+    height: 40px;
+    background-color: #ccc;
+}
+
+.inventory-section {
+    text-align: center;
+    margin: 40px 0;    
+}
+
+.inventory-section h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.action-button {
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    width: 10%;
+    transition: transform 0.2s;
+}
+
+.action-button:hover {
+    transform: scale(1.05);
+}
+
+
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 1150px; /* Ajustar para mostrar solo 5 imágenes visibles */
+    max-width: 1150px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    background-color: #ffffff;
+    margin: 0 auto;
+}
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #4e4e4e;
+    border-radius: 15px;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+}
+
+.carousel-images img {
+    width: 210px; /* Ajustado para 5 imágenes visibles */
+    margin: 0 6px; /* Menor margen */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-images img:hover {
+    transform: scale(1.05);
+}
+
+.arrow {
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 25px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.left-arrow {
+    left: -50px;
+}
+
+.right-arrow {
+    right: -50px;
+}
+
+.arrow:hover {
+    background-color: #f0f0f0;
+}
+
+.arrow:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Alinea el botón "Regresar" en el centro, debajo de las imágenes */
+.back-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

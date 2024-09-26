@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background-color: #e0e0e0;
+}
+
+h1 {
+    font-size: 40px; /* Ajusta el tamaño de la fuente */
+    letter-spacing: 2px; /* Ajusta la separación entre las letras */
+    font-weight: bold; /* Hace que el texto sea más grueso, si lo deseas */
+    text-align: left; 
+    margin: 0; 
+}
+
+.container {
+   
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #bdbdbd;
+    border-radius: 10px 10px 0 0;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon-btn {
+    border: none;
+    cursor: pointer;
+}
+
+.gray-regresar {
+    width: auto; /* Deja que el ancho se ajuste al contenido */
+    padding: 10px 20px; /* Añade relleno para que el botón se vea mejor */
+    background-color: #ccc; /* Fondo gris */
+    color: #333; /* Color del texto */
+    border: none; /* Elimina los bordes del botón */
+    border-radius: 5px; 
+    cursor: pointer; /* Mantén el cursor tipo botón */
+    font-size: 16px; /* Ajusta el tamaño de la fuente */
+    margin-right: 20px; /* Espacio entre este botón y los otros elementos */
+}
+
+.red-circle {
+    width: 50px;
+    height: 40px;
+    background-color: #E23636;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.gray-square {
+    width: 50px;
+    height: 40px;
+    background-color: #ccc;
+}
+
+.grid-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    align-items: center;
+}
+
+.content {
+    background-color: #f4f4f4;
+    padding: 20px;
+    height: calc(100vh - 50px); /* Elimina espacios y ajusta para ocupar toda la ventana */
+}
+  
+h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin: 30px 0;
+}
+  
+.button-container {
+    position: absolute;
+    top: 105px;
+    right: 20px;
+}
+  
+.filter-btn, .delete-btn {
+    background-color: red;
+    color: white;
+    border-radius: 10%;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+  
+.historial-container {
+    background-color: #e6e6e6;
+    height: 50vh; /* Ocupar más espacio vertical */
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    margin-top: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: gray lightgray;
+}
+  
+.historial-container::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.historial-container::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px;
+}
+  
+.historial-container::-webkit-scrollbar-track {
+    background-color: lightgray;
+}
+  
+#historial {
+    list-style: none;
+    padding: 0;
+}
+  
+#historial li {
+    background-color: white;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.action-button {
+    padding: 10px 20px; /* Asegura el tamaño del botón rojo */
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+    width: auto; /* Permite que el ancho del botón rojo se ajuste automáticamente al contenido */
+    transition: transform 0.2s;
+}
+
+.action-button:hover {
+    transform: scale(1.05); 
+}
+
+.back-button {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 40px; /* Ajusta para moverlo hacia arriba o abajo */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+}
+
+/*Recorderis agregar el resto....*/
