@@ -68,7 +68,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      -./VentanaUno:/usr/local/apache2/htdocs/
+      - ./VentanaUno:/usr/local/apache2/htdocs/
     networks:
       - productstech_network
 
