@@ -1,7 +1,7 @@
 services:
   # Servicio para la base de datos MySQL
   mysql:
-    image: mysql:latest  # Indentación corregida
+    image: mysql:latest  
     container_name: mysql-db
     environment:
       MYSQL_USER: username
@@ -18,7 +18,7 @@ services:
   # Servicio para la API Backend
   backend:
     build:
-      context: ./Backend  # Asegúrate de que el Dockerfile esté aquí
+      context: ./Backend  
       dockerfile: Dockerfile
     container_name: products_tech_backend
     ports:
