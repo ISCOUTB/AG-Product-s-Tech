@@ -78,5 +78,4 @@ volumes:
 
 networks:
   ag:
-    driver: bridge
     external: true
