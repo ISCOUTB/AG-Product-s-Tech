@@ -13,7 +13,7 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - productstech_network
+      - ag
 
   # Servicio para la API Backend
   backend:
@@ -32,7 +32,7 @@ services:
     depends_on:
       - mysql
     networks:
-      - productstech_network
+      - ag
       
   # Servicio para la base de datos MongoDB
   mongodb:
@@ -43,7 +43,7 @@ services:
     volumes:
       - mongo_data:/data/db
     networks:
-      - productstech_network
+      - ag
 
   # Servicio para Mongo Express (interfaz web para MongoDB)
   mongo-express:
@@ -60,7 +60,7 @@ services:
     depends_on:
       - mongodb
     networks:
-      - productstech_network
+      - ag
 
   apache:
     image: httpd:latest
@@ -70,12 +70,12 @@ services:
     volumes:
       - ./VentanaUno:/usr/local/apache2/htdocs/
     networks:
-      - productstech_network
+      - ag
 
 volumes:
   mongo_data:
   mysql_data:
 
 networks:
-  productstech_network:
+  ag:
     driver: bridge
