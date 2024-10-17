@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: productstech_db
     ports:
-      - "3306:3306"
+      - "3356:3356"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
@@ -66,7 +66,7 @@ services:
     image: httpd:latest
     container_name: apache-server
     ports:
-      - "80:80"
+      - "2024:2024"
     volumes:
       - ./VentanaUno:/usr/local/apache2/htdocs/
     networks:
