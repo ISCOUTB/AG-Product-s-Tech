@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up</title>
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form action="#">
+                <h1>Crear Cuenta</h1>
+                <input type="text" placeholder="Nombre Completo">
+                <input type="text" placeholder="Nombre de usuario">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Contraseña">
+                <button>Enviar</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form action="#">
+                <h1>Iniciar Sesión</h1>
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Contraseña">
+                <a href="#" class="fp">Olvidaste tu contraseña?</a>
+                <!-- Agregar id al botón para identificarlo -->
+                <button id="iniciar-sesion-btn" type="button">Iniciar</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>¿Ya nos conocemos?</h1>
+                    <p>Ingrese sus datos personales para utilizar todas las funciones del sitio</p>
+                    <button id="login">Mi Sesión</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Product's Tech</h1>
+                    <p>Regístrese con sus datos personales para utilizar todas las funciones del sitio</p>
+                    <button id="register">Registrarse</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Login.js"></script>
+</body>
+</html>
