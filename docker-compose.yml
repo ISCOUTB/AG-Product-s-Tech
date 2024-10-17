@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile
     container_name: products_tech_backend
     ports:
-      - 8001:8001
+      - 8009:8009
     environment:
       - DB_HOST=mysql
       - DB_USER=username
