@@ -40,7 +40,7 @@ services:
     ports:
       - "2024:80"
     volumes:
-      - ./VentanaUno:/usr/local/apache2/htdocs/
+      - ./login:/usr/local/apache2/htdocs/
     networks:
       - ag
 
