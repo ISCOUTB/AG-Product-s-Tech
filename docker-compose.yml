@@ -18,7 +18,7 @@ services:
   # Servicio para la API Backend
   backend:
     build:
-      context: ./Backend  
+      context: ./backend  
       dockerfile: Dockerfile
     container_name: products_tech_backend
     ports:
