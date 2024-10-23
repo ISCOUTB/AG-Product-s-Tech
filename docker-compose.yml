@@ -2,7 +2,7 @@ services:
   # Servicio para la base de datos MySQL
   mysql:
     image: mysql:latest  
-    container_name: AG_products_tech_mysql-db
+    container_name: ag_products_tech_mysql-db
     environment:
       MYSQL_USER: username
       MYSQL_PASSWORD: password
@@ -20,7 +20,7 @@ services:
     build:
       context: ./backend  
       dockerfile: Dockerfile
-    container_name: AG_products_tech_backend
+    container_name: ag_products_tech_backend
     ports:
       - 8009:8009
     environment:
@@ -36,7 +36,7 @@ services:
 
   apache:
     image: httpd:latest
-    container_name: AG_products_tech_apache_server
+    container_name: ag_products_tech_apache_server
     ports:
       - "2024:80"
     volumes:
