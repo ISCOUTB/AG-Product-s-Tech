@@ -1,12 +1,12 @@
 // Crear un objeto de rutas para cada sección
 const rutas = {
-    proveedores: 'Proovedores/Proovedores.html',  // Redirigir a VentanaDos.html por ahora
-    inventario: 'Inventario/Inventario.html',
-    historial: 'Historial/Historial.html',
-    informes: 'Informes/Informes.html',
-    ventas: 'Ventas/Ventas.html',
-    compras: 'Compras/Compras.html',
-    VolverLogin: 'Login/login.html'
+    proveedores: 'proovedores/Proovedores.html',  // Redirigir a VentanaDos.html por ahora
+    inventario: 'inventario/Inventario.html',
+    historial: 'historial/Historial.html',
+    informes: 'informes/Informes.html',
+    ventas: 'ventas/Ventas.html',
+    compras: 'compras/Compras.html',
+    VolverLogin: 'login/login.html'
 };
 
 // Función para manejar redirecciones
