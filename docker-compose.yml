@@ -40,7 +40,7 @@ services:
     ports:
       - "2024:80"
     volumes:
-      - ./login:/usr/local/apache2/htdocs/
+      - ./frontend:/usr/local/apache2/htdocs/
     networks:
       - ag
 
