@@ -132,3 +132,90 @@ h1 {
     text-align: center; /* Alineación del texto dentro del cuadro */
 }
 
+/* Dropdown contenedor */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 260px;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Mostrar el dropdown al aplicar la clase show */
+.dropdown.show {
+    display: block;
+}
+
+/* Encabezado del dropdown */
+.dropdown-content h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    text-align: left;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+/* Estilo de los párrafos en el dropdown */
+.dropdown-content p {
+    margin: 8px 15px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Estilo para el nombre y el correo */
+.dropdown-content span {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-top: -5px;
+}
+
+
+
+/* Estilo para el botón de cerrar sesión */
+#logoutButton {
+    background-color: #e74c3c; /* Rojo vivo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* Centramos horizontalmente */
+}
+
+/* Efecto hover para el botón */
+#logoutButton:hover {
+    background-color: #c0392b; /* Rojo más oscuro */
+}
+
+/* Alinear el botón en el cuadro superior */
+.top-right {
+    display: flex;
+    justify-content: center;  /* Centramos horizontalmente */
+    align-items: center;      /* Centramos verticalmente */
+    height: 100%;             /* Aseguramos que ocupe todo el alto del contenedor */
+    padding: 10px;
+}
+
+.dropdown-content h4 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px;
+    text-align: left;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
