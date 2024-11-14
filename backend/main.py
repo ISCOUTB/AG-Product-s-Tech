@@ -4,6 +4,7 @@ from datetime import date
 from fastapi.middleware.cors import CORSMiddleware
 from .database import get_mysql_conn, execute_query, execute_non_query
 from .crud import (
+
     obtener_todos_productos, crear_producto, obtener_producto_por_id, 
     actualizar_producto, eliminar_producto,
     obtener_todo_inventario, crear_inventario, actualizar_inventario, eliminar_inventario,
@@ -11,6 +12,7 @@ from .crud import (
     obtener_todas_compras, crear_compra, actualizar_compra, eliminar_compra,
     obtener_todos_informes, crear_informe, generar_informe_ventas
 )
+
 from .models import User, LoginData, Producto, Inventario, Venta, Compra, Informe
 
 QUERY_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() as id"
@@ -147,10 +149,6 @@ def leer_informes():
 @app.post("/informes/", response_model=Informe)
 def agregar_informe(informe: Informe):
     return crear_informe(informe)
-
-@app.post("/informes/ventas/")
-def generar_informe_de_ventas(fecha_inicio: date, fecha_fin: date):
-    return generar_informe_ventas(fecha_inicio, fecha_fin)
 
 @app.post("/informes/ventas/")
 def generar_informe_de_ventas(fecha_inicio: date, fecha_fin: date):
