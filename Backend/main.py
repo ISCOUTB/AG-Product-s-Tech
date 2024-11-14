@@ -1,12 +1,9 @@
 from typing import List, Optional
-from pydantic import BaseModel
-from datetime import date
 from fastapi import FastAPI, HTTPException, status
+from datetime import date
 from fastapi.middleware.cors import CORSMiddleware
-from database import execute_query, execute_non_query
-import mysql.connector
-import os
-from crud import (
+from .database import get_mysql_conn, execute_query, execute_non_query
+from .crud import (
     obtener_todos_productos, crear_producto, obtener_producto_por_id, 
     actualizar_producto, eliminar_producto,
     obtener_todo_inventario, crear_inventario, actualizar_inventario, eliminar_inventario,
@@ -14,7 +11,7 @@ from crud import (
     obtener_todas_compras, crear_compra, actualizar_compra, eliminar_compra,
     obtener_todos_informes, crear_informe, generar_informe_ventas
 )
-from models import Producto, Inventario, Venta, Compra, Informe
+from .models import User, LoginData, Producto, Inventario, Venta, Compra, Informe
 
 QUERY_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() as id"
 
@@ -23,7 +20,7 @@ app = FastAPI()
 
 # Configuración de CORS
 origins = [
-    "http://localhost",  # URL del frontend
+    "http://127.0.0.1:2024",  # URL del frontend
 ]
 
 app.add_middleware(
@@ -34,80 +31,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Variables de entorno para la base de datos MySQL
-MYSQL_USER = os.getenv("MYSQL_USER", "root")
-MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD", "password")
-MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
-MYSQL_PORT = int(os.getenv("MYSQL_PORT", 3306))
-MYSQL_DB = os.getenv("MYSQL_DB", "test_db")
-
-# Conexión a MySQL
-def get_mysql_conn():
-    try:
-        conn = mysql.connector.connect(
-            user=MYSQL_USER,
-            password=MYSQL_PASSWORD,
-            host=MYSQL_HOST,
-            port=MYSQL_PORT,
-            database=MYSQL_DB
-        )
-        return conn
-    except Exception as e:
-        print(f"Error connecting to MySQL: {e}")
-        return None
-
-# Modelo de datos para el usuario
-class User(BaseModel):
-    username: str
-    email: str
-    password: str
-    full_name: str
-
-# Función para registrar un usuario
-def registrar_usuario(user: User):
-    conn = get_mysql_conn()
-    if conn is None:
-        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
-
-    try:
-        cursor = conn.cursor()
-        cursor.execute(
-            "INSERT INTO users (username, email, password, full_name) VALUES (%s, %s, %s, %s)",
-            (user.username, user.email, user.password, user.full_name)
-        )
-        conn.commit()
-        cursor.close()
-        conn.close()
-        return {"message": "User registered successfully"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"MySQL query failed: {e}")
-
-# Endpoint para registrar un usuario
-@app.post("/register/", response_model=User)
-def register_user(user: User):
-    return registrar_usuario(user)
-
-# Endpoint de prueba para verificar conexión a MySQL
-@app.get("/mysql/products/")
-def get_products():
-    conn = get_mysql_conn()
-    if conn is None:
-        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
-
-    try:
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM Producto;")  # Cambia 'Producto' según tu esquema de tablas
-        products = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        return {"products": products}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"MySQL query failed: {e}")
-
 # Endpoint de bienvenida
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the API with MySQL"}
+
+# Endpoint para registrar un usuario
+@app.post("/register/")
+def register_user(user: User):
+    query = "INSERT INTO users (nombre_completo, nick, email, contrasena) VALUES (%s, %s, %s, %s)"
+    try:
+        execute_non_query(query, (user.full_name, user.username, user.email, user.password))
+        return {"message": "User registered successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MySQL query failed: {e}")
+
+@app.post("/login/")
+def login(data: LoginData):
+    query = "SELECT * FROM users WHERE email = %s AND contrasena = %s"
+    try:
+        user = execute_query(query, (data.email, data.password))
+        if not user:
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        return {"message": "Login successful", "user": user}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MySQL query failed: {e}")
+
+# Endpoint de prueba para verificar conexión a MySQL
+@app.get("/mysql/products/")
+def test_mysql_connection():
+    conn = get_mysql_conn()
+    if conn:
+        conn.close()
+        return {"message": "Conexión exitosa a la base de datos"}
+    else:
+        raise HTTPException(status_code=500, detail="No se pudo conectar a la base de datos")
 
 # Producto routes
 @app.get("/productos/", response_model=List[Producto])
@@ -189,6 +147,10 @@ def leer_informes():
 @app.post("/informes/", response_model=Informe)
 def agregar_informe(informe: Informe):
     return crear_informe(informe)
+
+@app.post("/informes/ventas/")
+def generar_informe_de_ventas(fecha_inicio: date, fecha_fin: date):
+    return generar_informe_ventas(fecha_inicio, fecha_fin)
 
 @app.post("/informes/ventas/")
 def generar_informe_de_ventas(fecha_inicio: date, fecha_fin: date):
