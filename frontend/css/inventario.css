@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif; /*'Courier New', Courier, monospace*/
 }
 
 html, body {
@@ -100,15 +100,12 @@ h1 {
     cursor: pointer;
     border-radius: 10px;
     font-size: 16px;
-    width: 10%;
     transition: transform 0.2s;
 }
 
 .action-button:hover {
     transform: scale(1.05);
 }
-
-
 
 .carousel-container {
     display: flex;
@@ -148,7 +145,7 @@ h1 {
 }
 
 .arrow {
-    background-color: #ffffff;
+    background-color: #BEBEBE;
     border: none;
     cursor: pointer;
     padding: 12px;
@@ -271,4 +268,148 @@ h1 {
     color: #2c3e50;
     border-bottom: 1px solid #ddd;
     padding-bottom: 8px;
+}
+
+/* Modal básico para centrar el contenido en pantalla */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Botón de cerrar (equis) en la esquina superior derecha */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Estilos para la imagen seleccionada */
+.detalle-imagen {
+    text-align: center;
+    width: 500px;
+    max-height: 80vh; /* Limitar la altura máxima del modal */
+    overflow-y: auto; /* Habilitar scroll si el contenido es demasiado largo */
+}
+
+.detalle-imagen img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.detalle-imagen p {
+    margin-top: 10px;
+    font-size: 18px;
+    word-wrap: break-word; /* Permitir que las palabras largas se ajusten */
+    white-space: pre-wrap; /* Ajustar la descripción al ancho disponible */
+    max-width: 100%; /* No permitir que se salga del contenedor */
+}
+
+/* Estilos para el formulario de agregar imagen */
+.form-container {
+    width: 500px;
+}
+
+.form-container input[type="text"], .form-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-container .action-button {
+    display: block;
+    margin: 20px auto 0 auto; /* Margen superior de 20px, márgenes izquierdo y derecho automáticos */
+}
+
+.detalle-imagen .action-button {
+    display: block;
+    margin: 20px auto 0 auto;
+    background-color: #e74c3c; /* Rojo vivo para indicar eliminación */
+}
+
+.detalle-imagen .action-button:hover {
+    background-color: #c0392b; /* Rojo más oscuro al hacer hover */
+}
+
+/* Estilo para el cuadro de búsqueda */
+.search-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#listaResultados {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#listaResultados li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+#listaResultados li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Estilo para cerrar el cuadro de búsqueda */
+.search-container .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Animación de iluminación al rededor del proveedor seleccionado */
+.item.selected {
+    animation: highlight 0.6s ease-in-out;
+    box-shadow: 0 0 15px 5px #ff4d4d; /* Color rojo alrededor */
+    border-radius: 10px;
+}
+
+@keyframes highlight {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px 2px #ff4d4d;
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px 10px #ff4d4d;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px 2px #ff4d4d;
+    }
 }
