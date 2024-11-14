@@ -1,13 +1,13 @@
+from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import date
-import sqlite3
 from fastapi import HTTPException
-from models import Producto, Inventario, Venta, Compra, Informe
-from Backend.main import get_sqlite_conn  # O el lugar donde esté definida la conexión a SQLite
+from .models import Producto, Inventario, Venta, Compra, Informe
+from .database import get_mysql_conn  
 
 # Funciones para Productos
 def obtener_todos_productos() -> List[Producto]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
     
@@ -20,7 +20,7 @@ def obtener_todos_productos() -> List[Producto]:
         conn.close()
 
 def crear_producto(producto: Producto) -> Producto:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -38,7 +38,7 @@ def crear_producto(producto: Producto) -> Producto:
         conn.close()
 
 def obtener_producto_por_id(id_producto: int) -> Optional[Producto]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
     
@@ -53,7 +53,7 @@ def obtener_producto_por_id(id_producto: int) -> Optional[Producto]:
         conn.close()
 
 def actualizar_producto(id_producto: int, producto_actualizado: Producto) -> Optional[Producto]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -74,7 +74,7 @@ def actualizar_producto(id_producto: int, producto_actualizado: Producto) -> Opt
         conn.close()
 
 def eliminar_producto(id_producto: int) -> bool:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -88,7 +88,7 @@ def eliminar_producto(id_producto: int) -> bool:
 
 # Funciones para Inventario
 def obtener_todo_inventario() -> List[Inventario]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
     
@@ -101,7 +101,7 @@ def obtener_todo_inventario() -> List[Inventario]:
         conn.close()
 
 def crear_inventario(inventario: Inventario) -> Inventario:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -118,7 +118,7 @@ def crear_inventario(inventario: Inventario) -> Inventario:
         conn.close()
 
 def obtener_inventario_por_id(id_inventario: int) -> Optional[Inventario]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -133,7 +133,7 @@ def obtener_inventario_por_id(id_inventario: int) -> Optional[Inventario]:
         conn.close()
 
 def actualizar_inventario(id_inventario: int, inventario_actualizado: Inventario) -> Optional[Inventario]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -153,7 +153,7 @@ def actualizar_inventario(id_inventario: int, inventario_actualizado: Inventario
         conn.close()
 
 def eliminar_inventario(id_inventario: int) -> bool:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -167,7 +167,7 @@ def eliminar_inventario(id_inventario: int) -> bool:
 
 # Funciones para Ventas
 def obtener_todas_ventas() -> List[Venta]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
     
@@ -180,7 +180,7 @@ def obtener_todas_ventas() -> List[Venta]:
         conn.close()
 
 def crear_venta(venta: Venta) -> Venta:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -197,7 +197,7 @@ def crear_venta(venta: Venta) -> Venta:
         conn.close()
 
 def obtener_venta_por_id(id_venta: int) -> Optional[Venta]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -212,7 +212,7 @@ def obtener_venta_por_id(id_venta: int) -> Optional[Venta]:
         conn.close()
 
 def actualizar_venta(id_venta: int, venta_actualizada: Venta) -> Optional[Venta]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -232,7 +232,7 @@ def actualizar_venta(id_venta: int, venta_actualizada: Venta) -> Optional[Venta]
         conn.close()
 
 def eliminar_venta(id_venta: int) -> bool:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -246,7 +246,7 @@ def eliminar_venta(id_venta: int) -> bool:
 
 # Funciones para Compras
 def obtener_todas_compras() -> List[Compra]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
     
@@ -259,7 +259,7 @@ def obtener_todas_compras() -> List[Compra]:
         conn.close()
 
 def crear_compra(compra: Compra) -> Compra:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -276,7 +276,7 @@ def crear_compra(compra: Compra) -> Compra:
         conn.close()
 
 def obtener_compra_por_id(id_compra: int) -> Optional[Compra]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -291,7 +291,7 @@ def obtener_compra_por_id(id_compra: int) -> Optional[Compra]:
         conn.close()
 
 def actualizar_compra(id_compra: int, compra_actualizada: Compra) -> Optional[Compra]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -311,7 +311,7 @@ def actualizar_compra(id_compra: int, compra_actualizada: Compra) -> Optional[Co
         conn.close()
 
 def eliminar_compra(id_compra: int) -> bool:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -325,7 +325,7 @@ def eliminar_compra(id_compra: int) -> bool:
 
 # Funciones para Informes
 def obtener_todos_informes() -> List[Informe]:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
     
@@ -338,7 +338,7 @@ def obtener_todos_informes() -> List[Informe]:
         conn.close()
 
 def crear_informe(informe: Informe) -> Informe:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
@@ -356,7 +356,7 @@ def crear_informe(informe: Informe) -> Informe:
 
 # Función adicional para generar informes de ventas
 def generar_informe_ventas(fecha_inicio: date, fecha_fin: date) -> Informe:
-    conn = get_sqlite_conn()
+    conn = get_mysql_conn()
     if conn is None:
         raise HTTPException(status_code=500, detail="Could not connect to SQLite")
 
