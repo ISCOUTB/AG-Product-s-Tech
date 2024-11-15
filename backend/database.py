@@ -2,63 +2,60 @@ import mysql.connector
 from mysql.connector import Error
 import os
 
-# Definir las variables de entorno directamente en el código
-os.environ['DB_HOST'] = '127.0.0.1'
-os.environ['DB_PORT'] = '3302'
-os.environ['DB_NAME'] = 'productstech_db'
-os.environ['DB_USER'] = 'root'
-os.environ['DB_PASSWORD'] = 'rootpassword'
 
+# Variables de entorno para la base de datos MySQL
+MYSQL_USER = os.getenv("DB_USER", "root")
+MYSQL_PASSWORD = os.getenv("DB_PASSWORD", "rootpassword")
+MYSQL_HOST = os.getenv("DB_HOST", "127.0.0.1")
+MYSQL_PORT = int(os.getenv("DB_PORT", 3302))
+MYSQL_DB = os.getenv("DB_NAME", "productstech_db")
 
 def get_mysql_conn():
-    """Establece una conexión a la base de datos MySQL."""
     try:
-        connection = mysql.connector.connect(
-            host=os.getenv('DB_HOST'),
-            port=os.getenv('DB_PORT'),
-            database=os.getenv('DB_NAME'),
-            user=os.getenv('DB_USER'),
-            password=os.getenv('DB_PASSWORD')
+        conn = mysql.connector.connect(
+            host=MYSQL_HOST,
+            user=MYSQL_USER,
+            password=MYSQL_PASSWORD,
+            database=MYSQL_DB,
+            port=MYSQL_PORT
         )
-        if connection.is_connected():
-            print("Conexión exitosa a la base de datos MySQL")
-            return connection
+        if conn.is_connected():
+            print("Conexión exitosa a la base de datos")
+            return conn
+        else:
+            print("No se pudo conectar a la base de datos")
+            return None
     except Error as e:
-        print(f"Error al conectar a MySQL: {e}")
+        print(f"Error: {e}")
         return None
 
-def execute_query(query, params=None):
-    """Ejecuta una consulta SELECT y devuelve los resultados."""
-    connection = get_mysql_conn()
-    if connection is None:
-        return None
+def execute_query(query: str, params: tuple = ()):
     try:
+        connection = get_mysql_conn()
+        if connection is None:
+            raise Exception("Failed to connect to the database")
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query, params)
-        results = cursor.fetchall()
-        return results
+        result = cursor.fetchall()
+        return result
     except Error as e:
-        print(f"Error al ejecutar la consulta: {e}")
-        return None
+        print(f"Error: {e}")
     finally:
-        if connection.is_connected():
+        if connection and connection.is_connected():
             cursor.close()
             connection.close()
 
-def execute_non_query(query, params=None):
-    """Ejecuta una consulta INSERT, UPDATE o DELETE."""
-    connection = get_mysql_conn()
-    if connection is None:
-        return False
+def execute_non_query(query: str, params: tuple = ()):
     try:
+        connection = get_mysql_conn()
+        if connection is None:
+            raise Exception("Failed to connect to the database")
         cursor = connection.cursor()
         cursor.execute(query, params)
         connection.commit()
-        return True
     except Error as e:
-        print(f"Error al ejecutar la consulta: {e}")
-        return False
+        print(f"Error: {e}")
     finally:
-        if connection.is_connected():
+        if connection and connection.is_connected():
             cursor.close()
             connection.close()

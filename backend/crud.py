@@ -1,8 +1,84 @@
 from typing import List, Optional
 from datetime import date
 from fastapi import HTTPException
-from .models import Producto, Inventario, Venta, Compra, Informe
-from .database import get_mysql_conn  
+from models import Producto, Inventario, Venta, Compra, Informe, User
+from database import get_mysql_conn  
+
+# Funciones para Usuarios
+def crear_usuario(usuario: User) -> User:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO users (nombre_completo, nick, email, contrasena)
+            VALUES (%s, %s, %s, %s)
+        """, (usuario.nombre_completo, usuario.nick, usuario.email, usuario.contrasena))
+        conn.commit()
+        usuario.id = cursor.lastrowid
+        return usuario
+    finally:
+        conn.close()
+
+def obtener_usuario_por_id(id_usuario: int) -> Optional[User]:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM users WHERE Id_usuario = %s;", (id_usuario,))
+        row = cursor.fetchone()
+        if row:
+            return User(**row)
+        return None
+    finally:
+        conn.close()
+
+def actualizar_usuario(id_usuario: int, usuario_actualizado: User) -> Optional[User]:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE users
+            SET nombre_completo = %s, nick = %s, email = %s, contrasena = %s
+            WHERE Id_usuario = %s
+        """, (usuario_actualizado.nombre_completo, usuario_actualizado.nick, usuario_actualizado.email, usuario_actualizado.contrasena, id_usuario))
+        conn.commit()
+        return usuario_actualizado
+    finally:
+        conn.close()
+
+def eliminar_usuario(id_usuario: int) -> bool:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM users WHERE Id_usuario = %s;", (id_usuario,))
+        conn.commit()
+        return cursor.rowcount > 0
+    finally:
+        conn.close()
+
+def obtener_todos_usuarios() -> List[User]:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM users;")
+        rows = cursor.fetchall()
+        return [User(**row) for row in rows]
+    finally:
+        conn.close()
 
 # Funciones para Productos
 def obtener_todos_productos() -> List[Producto]:
@@ -350,6 +426,51 @@ def crear_informe(informe: Informe) -> Informe:
         )
         conn.commit()
         return informe
+    finally:
+        conn.close()
+
+def obtener_informe_por_id(id_informe: int) -> Optional[Informe]:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+    
+    try:
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM informes WHERE Id_informe = %s;", (id_informe,))
+        row = cursor.fetchone()
+        if row:
+            return Informe(**row)
+        return None
+    finally:
+        conn.close()
+
+def actualizar_informe(id_informe: int, informe_actualizado: Informe) -> Optional[Informe]:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE informes
+            SET Titulo = %s, Contenido = %s, Fecha = %s
+            WHERE Id_informe = %s
+        """, (informe_actualizado.Titulo, informe_actualizado.Contenido, informe_actualizado.Fecha, id_informe))
+        conn.commit()
+        return informe_actualizado
+    finally:
+        conn.close()
+
+def eliminar_informe(id_informe: int) -> bool:
+    conn = get_mysql_conn()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Could not connect to MySQL")
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM informes WHERE Id_informe = %s;", (id_informe,))
+        conn.commit()
+        return cursor.rowcount > 0
     finally:
         conn.close()
 

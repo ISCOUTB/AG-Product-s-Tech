@@ -17,39 +17,70 @@
             </div>
         </header>
         <div class="inventory-section">
-            <h2>Inventario</h2>
+            <h2>Proveedores</h2>
             <div class="buttons">
                 <button class="action-button">Actualizar</button>
-                <button class="action-button">Añadir</button>
-                <button class="action-button">Buscar</button>
+                <button class="action-button" id="btnMostrarForm">Añadir</button>
+                <button class="action-button" id="btnBuscarProveedor">Buscar</button>
                 <button class="action-button">Eliminar</button>
             </div>
         </div>
         <div class="carousel-container">
             <button class="arrow left-arrow" id="leftArrow">&lt;</button>
             <div class="carousel">
-                <div class="carousel-images">
-                    <img src="ima1.png" alt="Imagen 1">
-                    <img src="ima2.png" alt="Imagen 2">
-                    <img src="ima3.png" alt="Imagen 3">
-                    <img src="ima4.png" alt="Imagen 4">
-                    <img src="ima5.png" alt="Imagen 5">
-                    <img src="ima1.png" alt="Imagen 6">
-                    <img src="ima2.png" alt="Imagen 7">
-                    <img src="ima3.png" alt="Imagen 8">
-                    <img src="ima4.png" alt="Imagen 9">
-                    <img src="ima5.png" alt="Imagen 10">
-                    
+                <div class="carousel-images" id="carouselImages">
+                    <div class="item" data-titulo="Producto 1" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima1.png" alt="Imagen 1">
+                    </div>
+                    <div class="item" data-titulo="Producto 2" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima2.png" alt="Imagen 2">
+                    </div>
+                    <div class="item" data-titulo="Producto 3" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima3.png" alt="Imagen 3">
+                    </div>
+                    <div class="item" data-titulo="Producto 4" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima4.png" alt="Imagen 4">
+                    </div>
+                    <div class="item" data-titulo="Producto 5" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima5.png" alt="Imagen 5">
+                    </div>
+                    <div class="item" data-titulo="Producto 6" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima1.png" alt="Imagen 6">
+                    </div>
+                    <div class="item" data-titulo="Producto 7" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima2.png" alt="Imagen 7">
+                    </div>
+                    <div class="item" data-titulo="Producto 8" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima3.png" alt="Imagen 8">
+                    </div>
+                    <div class="item" data-titulo="Producto 9" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima4.png" alt="Imagen 9">
+                    </div>
+                    <div class="item" data-titulo="Producto 10" data-descripcion="Descripción del proveedor 1">
+                        <img src="imagenes/ima5.png" alt="Imagen 10">
+                    </div>
                 </div>
             </div>
             <button class="arrow right-arrow" id="rightArrow">&gt;</button>
         </div>
         
         <div class="back-button">
-            <a href="Index.html"><input type="button" value="Regresar" class="action-button">
+            <a href="menu.html"><input type="button" value="Regresar" class="action-button">
         </div>
     </div>
 
+    <div id="loginDropdown" class="dropdown">
+        <div class="dropdown-content">
+            <h4>MI PERFIL</h4>
+            <p class="name">Melany Saez</p>
+            <p class="email">msaez@utb.edu.co</p>
+            <div class="top-right">
+                <button id="logoutButton">Cerrar Sesión</button>
+            </div>
+            
+        </div>
+    </div>
+    
     <div id="participantsDropdown" class="dropdown">
         <div class="dropdown-content">
             <h3>PARTICIPANTES</h3>
@@ -59,7 +90,37 @@
             <p>Mariano <br><span>mariano@utb.edu.co</span></p>
         </div>
     </div>
-   
-    <script src="js/inventario.js"></script> 
+
+    <!-- Formulario para agregar imagen -->
+    <div id="formAgregar" class="form-container modal">
+        <span class="close" id="cerrarForm">&times;</span> <!-- Equis para cerrar el formulario -->
+        <label for="imagen">Agregar imagen</label>
+        <input type="file" id="inputImagen" accept="image/*">
+        <label for="titulo">Título:</label>
+        <input type="text" id="inputTitulo">
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="inputDescripcion">
+        <button class="action-button" id="btnAgregarImagen">Agregar</button>
+    </div>
+
+    <!-- Modal para mostrar detalles de la imagen seleccionada -->
+    <div id="detalleImagen" class="detalle-imagen modal">
+        <span class="close" id="cerrarDetalles">&times;</span>
+        <img id="detalleImagenSrc" src="" alt="Detalle Imagen">
+        <p id="detalleTitulo"></p>
+        <p id="detalleDescripcion"></p>
+        <button class="action-button" id="btnEliminarImagen">Eliminar</button> <!-- Botón de eliminar -->
+    </div>
+
+    <!-- Cuadro de búsqueda -->
+    <!-- Cuadro de búsqueda -->
+    <div id="busquedaProveedor" class="search-container modal" style="display:none;">
+        <span class="close" id="cerrarBusqueda">&times;</span>
+        <input type="text" id="inputBusqueda" placeholder="Buscar proveedor...">
+        <ul id="listaResultados"></ul>
+    </div>
+
+
+    <script src="js/inventarios.js"></script> 
 </body>
 </html>

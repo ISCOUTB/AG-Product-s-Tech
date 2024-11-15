@@ -2,18 +2,19 @@ from typing import List, Optional
 from fastapi import FastAPI, HTTPException, status
 from datetime import date
 from fastapi.middleware.cors import CORSMiddleware
-from .database import get_mysql_conn, execute_query, execute_non_query
-from .crud import (
-
-    obtener_todos_productos, crear_producto, obtener_producto_por_id, 
-    actualizar_producto, eliminar_producto,
-    obtener_todo_inventario, crear_inventario, actualizar_inventario, eliminar_inventario,
-    obtener_todas_ventas, crear_venta, actualizar_venta, eliminar_venta,
-    obtener_todas_compras, crear_compra, actualizar_compra, eliminar_compra,
-    obtener_todos_informes, crear_informe, generar_informe_ventas
+from database import get_mysql_conn, execute_query, execute_non_query
+from crud import (
+    obtener_todos_usuarios, crear_usuario, obtener_usuario_por_id, 
+    actualizar_usuario, eliminar_usuario, obtener_todos_productos, 
+    crear_producto, obtener_producto_por_id, actualizar_producto, 
+    eliminar_producto, obtener_todo_inventario, obtener_inventario_por_id, 
+    crear_inventario, actualizar_inventario, eliminar_inventario, 
+    obtener_todas_ventas, crear_venta, obtener_venta_por_id, actualizar_venta, 
+    eliminar_venta, obtener_todas_compras, crear_compra, obtener_compra_por_id, 
+    actualizar_compra, eliminar_compra, obtener_todos_informes, obtener_informe_por_id,
+    crear_informe, actualizar_informe, eliminar_informe, generar_informe_ventas
 )
-
-from .models import User, LoginData, Producto, Inventario, Venta, Compra, Informe
+from models import User, LoginData, Producto, Inventario, Venta, Compra, Informe
 
 QUERY_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() as id"
 
@@ -69,6 +70,35 @@ def test_mysql_connection():
     else:
         raise HTTPException(status_code=500, detail="No se pudo conectar a la base de datos")
 
+# Usuario routes
+@app.get("/usuarios/", response_model=List[User])
+def obtener_usuarios():
+    return obtener_todos_usuarios()
+
+@app.post("/usuarios/", response_model=User)
+def crear_usuario(usuario: User):
+    return crear_usuario(usuario)
+
+@app.get("/usuarios/{id_usuario}", response_model=User)
+def obtener_usuario(id_usuario: int):
+    usuario = obtener_usuario_por_id(id_usuario)
+    if usuario is None:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    return usuario
+
+@app.put("/usuarios/{id_usuario}", response_model=User)
+def actualizar_usuario(id_usuario: int, usuario_actualizado: User):
+    usuario = actualizar_usuario(id_usuario, usuario_actualizado)
+    if usuario is None:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    return usuario
+
+@app.delete("/usuarios/{id_usuario}")
+def eliminar_usuario(id_usuario: int):
+    if not eliminar_usuario(id_usuario):
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    return {"message": "Usuario eliminado exitosamente"}
+
 # Producto routes
 @app.get("/productos/", response_model=List[Producto])
 def leer_productos():
@@ -99,6 +129,13 @@ def leer_inventario():
 def agregar_inventario(inventario: Inventario):
     return crear_inventario(inventario)
 
+@app.get("/inventario/{id_inventario}", response_model=Inventario)
+def obtener_inventario(id_inventario: int):
+    inventario = obtener_inventario_por_id(id_inventario)
+    if inventario is None:
+        raise HTTPException(status_code=404, detail="Inventario no encontrado")
+    return inventario
+
 @app.put("/inventario/{id_inventario}", response_model=Optional[Inventario])
 def modificar_inventario(id_inventario: int, inventario_actualizado: Inventario):
     return actualizar_inventario(id_inventario, inventario_actualizado)
@@ -115,6 +152,13 @@ def leer_ventas():
 @app.post("/ventas/", response_model=Venta)
 def agregar_venta(venta: Venta):
     return crear_venta(venta)
+
+@app.get("/ventas/{id_venta}", response_model=Venta)
+def obtener_venta(id_venta: int):
+    venta = obtener_venta_por_id(id_venta)
+    if venta is None:
+        raise HTTPException(status_code=404, detail="Venta no encontrada")
+    return venta
 
 @app.put("/ventas/{id_venta}", response_model=Optional[Venta])
 def modificar_venta(id_venta: int, venta_actualizada: Venta):
@@ -133,6 +177,13 @@ def leer_compras():
 def agregar_compra(compra: Compra):
     return crear_compra(compra)
 
+@app.get("/compras/{id_compra}", response_model=Compra)
+def obtener_compra(id_compra: int):
+    compra = obtener_compra_por_id(id_compra)
+    if compra is None:
+        raise HTTPException(status_code=404, detail="Compra no encontrada")
+    return compra
+
 @app.put("/compras/{id_compra}", response_model=Optional[Compra])
 def modificar_compra(id_compra: int, compra_actualizada: Compra):
     return actualizar_compra(id_compra, compra_actualizada)
@@ -149,6 +200,26 @@ def leer_informes():
 @app.post("/informes/", response_model=Informe)
 def agregar_informe(informe: Informe):
     return crear_informe(informe)
+
+@app.get("/informes/{id_informe}", response_model=Informe)
+def obtener_informe(id_informe: int):
+    informe = obtener_informe_por_id(id_informe)
+    if informe is None:
+        raise HTTPException(status_code=404, detail="Informe no encontrado")
+    return informe
+
+@app.put("/informes/{id_informe}", response_model=Informe)
+def actualizar_informe(id_informe: int, informe_actualizado: Informe):
+    informe = actualizar_informe(id_informe, informe_actualizado)
+    if informe is None:
+        raise HTTPException(status_code=404, detail="Informe no encontrado")
+    return informe
+
+@app.delete("/informes/{id_informe}")
+def eliminar_informe(id_informe: int):
+    if not eliminar_informe(id_informe):
+        raise HTTPException(status_code=404, detail="Informe no encontrado")
+    return {"message": "Informe eliminado exitosamente"}
 
 @app.post("/informes/ventas/")
 def generar_informe_de_ventas(fecha_inicio: date, fecha_fin: date):
