@@ -1,3 +1,9 @@
+// Crear un objeto de rutas para cada sección
+const rutas = {
+    VolverLogin: 'Login/login.html',
+    Regresar: 'VentanaUno/VentanaUno.html'
+};
+
 // Función para manejar redirecciones
 function redirigir(seccion) {
     window.location.href = rutas[seccion];
@@ -282,3 +288,6 @@ window.onload = function() {
 
     updateArrows(); // Al cargar la página, actualizar el estado de las flechas
 };
+
+
+
