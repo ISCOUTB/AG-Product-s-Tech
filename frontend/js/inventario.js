@@ -288,6 +288,3 @@ window.onload = function() {
 
     updateArrows(); // Al cargar la página, actualizar el estado de las flechas
 };
-
-
-
