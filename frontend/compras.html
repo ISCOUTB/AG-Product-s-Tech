@@ -16,18 +16,32 @@
                 <button class="icon-btn gray-square" id="btn-InfoAutores"></button>
             </div>
         </header>
+        
         <div class="inventory-section">
             <h2>Compras</h2>
             <div class="buttons">
-                <button class="action-button">Actualizar</button>
-                <button class="action-button">Añadir</button>
-                <button class="action-button">Buscar</button>
-                <button class="action-button">Eliminar</button>
+                <button class="action-button" id="btnActualizar">Actualizar</button>
+                <button class="action-button" id="btnAñadir">Añadir</button>
+                <button class="action-button" id="btnBuscar">Buscar</button>
+                <button class="action-button" id="btnEliminar">Eliminar</button>
+            </div>
+            
+            <!-- Formulario para añadir compra -->
+            <div id="formCompra" class="form-compra" style="display:none;">
+                <input type="text" id="productoCompra" placeholder="Producto">
+                <input type="number" id="cantidadCompra" placeholder="Cantidad">
+                <input type="number" id="precioCompra" placeholder="Precio">
+                <button class="action-button" id="btnGuardarCompra">Guardar Compra</button>
+            </div>
+            
+            <!-- Lista de compras -->
+            <div id="comprasList" class="compras-list">
+                <!-- Las compras se mostrarán aquí dinámicamente -->
             </div>
         </div>
-        
+
         <div class="back-button">
-            <a href="menu.html"><input type="button" value="Regresar" class="action-button">
+            <a href="menu.html"><input type="button" value="Regresar" class="action-button"></a>
         </div>
     </div>
 
@@ -41,6 +55,6 @@
         </div>
     </div>
 
-    <script src="js.compras.js"></script> 
+    <script src="js/compras.js"></script>
 </body>
 </html>
