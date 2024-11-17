@@ -288,3 +288,55 @@ window.onload = function() {
 
     updateArrows(); // Al cargar la página, actualizar el estado de las flechas
 };
+fetch('http://127.0.0.1:8009/btnAgregarImagen', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        titulo: tituloInput,
+        descripcion: descripcionInput,
+        imagen: e.target.result, // Base64 de la imagen
+    }),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al agregar la imagen en el servidor');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Imagen agregada en el servidor:', data);
+})
+.catch(error => {
+    console.error('Error al procesar la solicitud:', error);
+    alert('Hubo un problema al agregar la imagen. Inténtalo de nuevo.');
+});
+
+
+fetch('http://127.0.0.1:8009/btnEliminarImagen', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagenSrc,
+    }),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al eliminar la imagen en el servidor');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Imagen eliminada en el servidor:', data);
+
+    // Eliminar la imagen del DOM
+    currentImageItem.remove();
+    document.getElementById('detalleImagen').style.display = 'none'; // Cerrar el modal de detalles
+    updateArrows();
+    actualizarListaProveedores();
+})
+.catch(error => {
+    console.error('Error al procesar la solicitud:', error);
+    alert('Hubo un problema al eliminar la imagen. Inténtalo de nuevo.');
+});
