@@ -288,28 +288,144 @@ window.onload = function() {
 
     updateArrows(); // Al cargar la página, actualizar el estado de las flechas
 };
-document.getElementById('Regresar').addEventListener('click', function () {
-    fetch('http://127.0.0.1:8009/Regresar', {  
-        method: 'POST',       
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            accion: 'usuario-regreso', 
-        }),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la solicitud');
-        }
-        return response.json(); 
-    })
-    .then(data => {
-        console.log('Respuesta del servidor:', data); 
-        redirigir('Regresar'); 
-    })
-    .catch(error => {
-        console.error('Error al procesar la solicitud:', error);
-        alert('Hubo un problema al procesar tu solicitud. Intenta de nuevo.');
+const btnMostrarForm = document.getElementById('btnMostrarForm');
+const btnbusform = document.getElementById('btnbusForm');
+const btnactuform = document.getElementById('btnactForm');
+const btnform = document.getElementById('btnForm');
+
+if (btnMostrarForm && formagregar) {
+    btnMostrarForm.addEventListener('click', function() {
+        formagregar.style.display = 'block';
     });
+}
+if (btnForm && formeliminar) {
+    btnForm.addEventListener('click', function() {
+        formeliminar.style.display = 'block';
+    });
+}
+if (btnForm && formeliminar) {
+    btnForm.addEventListener('click', function() {
+        formeliminar.style.display = 'block';
+    });
+}
+if (btnForm && formeliminar) {
+    btnForm.addEventListener('click', function() {
+        formeliminar.style.display = 'block';
+    });
+}
+
+fetch('/productos/btneliminar{id_producto}', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagenSrc,
+    }),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al eliminar la imagen en el servidor');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Imagen eliminada en el servidor:', data);
+
+    // Eliminar la imagen del DOM
+    currentImageItem.remove();
+    document.getElementById('detalleImagen').style.display = 'none'; // Cerrar el modal de detalles
+    updateArrows();
+    actualizarListaProveedores();
+})
+.catch(error => {
+    console.error('Error al procesar la solicitud:', error);
+    alert('Hubo un problema al eliminar la imagen. Inténtalo de nuevo.');
+});
+
+fetch('/productos/btnbuscar{id_producto}', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagenSrc,
+    }),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al eliminar la imagen en el servidor');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Imagen eliminada en el servidor:', data);
+
+    // Eliminar la imagen del DOM
+    currentImageItem.remove();
+    document.getElementById('detalleImagen').style.display = 'none'; // Cerrar el modal de detalles
+    updateArrows();
+    actualizarListaProveedores();
+})
+.catch(error => {
+    console.error('Error al procesar la solicitud:', error);
+    alert('Hubo un problema al eliminar la imagen. Inténtalo de nuevo.');
+});
+
+fetch('/productos/btnactualizar{id_producto}', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagenSrc,
+    }),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al eliminar la imagen en el servidor');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Imagen eliminada en el servidor:', data);
+
+    // Eliminar la imagen del DOM
+    currentImageItem.remove();
+    document.getElementById('detalleImagen').style.display = 'none'; // Cerrar el modal de detalles
+    updateArrows();
+    actualizarListaProveedores();
+})
+.catch(error => {
+    console.error('Error al procesar la solicitud:', error);
+    alert('Hubo un problema al eliminar la imagen. Inténtalo de nuevo.');
+});
+
+fetch('/productos/btnagregar{id_producto}', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagenSrc,
+    }),
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al eliminar la imagen en el servidor');
+    }
+    return response.json();
+})
+.then(data => {
+    console.log('Imagen eliminada en el servidor:', data);
+
+    // Eliminar la imagen del DOM
+    currentImageItem.remove();
+    document.getElementById('detalleImagen').style.display = 'none'; // Cerrar el modal de detalles
+    updateArrows();
+    actualizarListaProveedores();
+})
+.catch(error => {
+    console.error('Error al procesar la solicitud:', error);
+    alert('Hubo un problema al eliminar la imagen. Inténtalo de nuevo.');
 });
