@@ -24,25 +24,32 @@
         </div> 
         <div class="historial-container">
           <ul id="historial">
-            <!-- Aquí se insertarán los eventos :))))))))) -->
+            <!-- Los eventos se insertarán aquí dinámicamente -->
           </ul>
         </div>
-      </div>  
-      <div class="back-button">
-        <a href="menu.html"><input type="button" value="Regresar" class="action-button">
-      </div> 
-    </div>
 
-    <div id="participantsDropdown" class="dropdown">
-        <div class="dropdown-content">
-            <h3>PARTICIPANTES</h3>
-            <p>Alfonso Grateron<br><span>alfonso@utb.edu.co</span></p>
-            <p>Melany Saez<br><span>msaez@utb.edu.co</span></p>
-            <p>Andres<br><span>andres@utb.edu.co</span></p>
-            <p>Mariano <br><span>mariano@utb.edu.co</span></p>
+        <!-- Formulario para agregar un nuevo evento -->
+        <div id="formHistorial" class="form-historial">
+          <input type="text" id="eventoHistorial" placeholder="Nuevo evento">
+          <button id="btnAgregarEvento" class="action-button">Agregar Evento</button>
         </div>
-    </div>
-    
-    <script src="js/historial.js"></script>
+    </div>  
+
+    <div class="back-button">
+      <a href="menu.html"><input type="button" value="Regresar" class="action-button">
+    </div> 
+  </div>
+
+  <div id="participantsDropdown" class="dropdown">
+      <div class="dropdown-content">
+          <h3>PARTICIPANTES</h3>
+          <p>Alfonso Grateron<br><span>alfonso@utb.edu.co</span></p>
+          <p>Melany Saez<br><span>msaez@utb.edu.co</span></p>
+          <p>Andres<br><span>andres@utb.edu.co</span></p>
+          <p>Mariano <br><span>mariano@utb.edu.co</span></p>
+      </div>
+  </div>
+  
+  <script src="js/historial.js"></script>
 </body>
 </html>
