@@ -90,17 +90,33 @@
             <p>Mariano <br><span>mariano@utb.edu.co</span></p>
         </div>
     </div>
-
-    <!-- Formulario para agregar imagen -->
-    <div id="formAgregar" class="form-container modal">
+    <div id="formagregar" class="form-container modal">
         <span class="close" id="cerrarForm">&times;</span> <!-- Equis para cerrar el formulario -->
-        <label for="imagen">Agregar imagen</label>
-        <input type="file" id="inputImagen" accept="image/*">
-        <label for="titulo">Título:</label>
-        <input type="text" id="inputTitulo">
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="inputDescripcion">
-        <button class="action-button" id="btnAgregarImagen">Agregar</button>
+        <label for="id">Id</label>
+        <input type="int" id="inputid">
+        <label for="marca">Marca</label>
+        <input type="text" id="inputmarca">
+        <label for="descripcion">Descripcion</label>
+        <input type="text" id="inputDescripcion0">
+        <button class="action-button" id="btnagregar">Agregar</button>
+    </div>
+    <div id="formeliminar" class="form-container modal">
+        <span class="close" id="cerrarForm">&times;</span> <!-- Equis para cerrar el formulario -->
+        <label for="id">Id</label>
+        <input type="int" id="inputid">
+        <button class="action-button" id="btneliminar">Eliminar</button>
+    </div>
+    <div id="formeactualizar" class="form-container modal">
+        <span class="close" id="cerrarForm">&times;</span> <!-- Equis para cerrar el formulario -->
+        <label for="id">Id</label>
+        <input type="int" id="inputid">
+        <button class="action-button" id="btnactualizar">Eliminar</button>
+    </div>
+    <div id="formbuscar" class="form-container modal">
+        <span class="close" id="cerrarForm">&times;</span> <!-- Equis para cerrar el formulario -->
+        <label for="id">Id</label>
+        <input type="int" id="inputid">
+        <button class="action-button" id="btnbuscar">Eliminar</button>
     </div>
 
     <!-- Modal para mostrar detalles de la imagen seleccionada -->
