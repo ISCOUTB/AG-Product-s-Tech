@@ -1,46 +1,77 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+from typing import Optional
 from datetime import date
 
-class User(BaseModel):
-    username: str
-    email: str
-    password: str
-    full_name: str
-
-class LoginData(BaseModel):
-    email: str
-    password: str
+class Usuario(BaseModel):
+    nombre_completo: str
+    nick: str
+    email: EmailStr
+    contrasena: str
 
 class Producto(BaseModel):
-    ID_producto: int
+    Id_producto: Optional[int]
     Nombre: str
+    Categoria: str
     Descripcion: str
-    categoria: int
-    precio: float
-    fecha_lanzamiento: date
-    ID_marca: int
+    Precio: float
+    fecha_lanzamineto: date
+    Especificaciones: str
+    Id_Marca: int
 
 class Inventario(BaseModel):
-    ID_inventario: int
-    ID_producto: int
+    Id_inventario: Optional[int]
+    Id_producto: int
     cantidad_stock: int
-    ubicacion_producto: str
+    Ubicacion_producto: str
+
+class Proveedor(BaseModel):
+    Id_proveedor: Optional[int]
+    nombre: str
+    contacto: int
+    Direccion: str
+
+class Cliente(BaseModel):
+    Id_cliente: Optional[int]
+    nombre: str
+    email: EmailStr
+    Telefono: int
+    direccion: str
+
+class Pedido(BaseModel):
+    Id_pedido: Optional[int]
+    fecha_pedido: date
+    fecha_entrega: date
+    Id_cliente: int
+    estado_pedido: str
 
 class Venta(BaseModel):
-    ID_venta: int
-    ID_producto: int
-    cantidad: int
-    fecha_venta: date
+    Id_venta: Optional[int]
+    Id_producto: int
+    Cantidad: int
+    Fecha: date
 
 class Compra(BaseModel):
-    ID_compra: int
-    ID_producto: int
-    cantidad: int
-    proveedor: str
-    fecha_compra: date
+    Id_compra: Optional[int]
+    Id_producto: int
+    Cantidad: int
+    Fecha: date
 
 class Informe(BaseModel):
-    ID_informe: int
-    tipo_informe: str
+    Id_informe: Optional[int]
+    Titulo: str
+    Contenido: str
+    Fecha: date
+
+class Marca(BaseModel):
+    Id_marca: Optional[int]
+    nombre: str
+    pais_origen: str
+
+class Categoria(BaseModel):
+    Id_categoria: Optional[int]
+    nombre: str
     descripcion: str
-    fecha_generacion: date
+
+class LoginData(BaseModel):
+    email: EmailStr
+    password: str

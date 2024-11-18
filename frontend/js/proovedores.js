@@ -288,7 +288,8 @@ window.onload = function() {
 
     updateArrows(); // Al cargar la página, actualizar el estado de las flechas
 };
-fetch('http://127.0.0.1:8009/btnAgregarImagen', {
+
+fetch('http://127.0.0.1:8000/btnAgregarImagen', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -312,7 +313,7 @@ fetch('http://127.0.0.1:8009/btnAgregarImagen', {
 });
 
 
-fetch('http://127.0.0.1:8009/btnEliminarImagen', {
+fetch('http://127.0.0.1:8000/btnEliminarImagen', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

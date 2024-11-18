@@ -1,7 +1,7 @@
 // Crear un objeto de rutas para cada sección
 const rutas = {
     VolverLogin: './PRODUCTS-TECH/Frontend/Login/login.html',
-    Regresar: './PRODUCTS-TECH/Frontend/VentanaUno/VentanaUno.html'
+    Regresar: './PRODUCTS-TECH/Frontend/VentanaUno/VentanaUno.html' 
 };
 
 // Función para manejar redirecciones
@@ -23,7 +23,7 @@ function agregarCompra() {
     const cantidad = document.getElementById('cantidadCompra').value;
     const precio = document.getElementById('precioCompra').value;
 
-    fetch('http://127.0.0.1:8009/compras', {
+    fetch('http://127.0.0.1:8000/compras', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -51,8 +51,8 @@ function agregarCompra() {
 }
 
 // Función para eliminar una compra
-function eliminarCompra(ID_compra) {
-    fetch(`http://127.0.0.1:8009/compras/${ID_compra}`, {
+function eliminarCompra(id_compra) {
+    fetch(`http://127.0.0.1:8000/compras/{id_compra}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
     })
@@ -75,7 +75,7 @@ function eliminarCompra(ID_compra) {
 
 // Función para cargar la lista de compras
 function cargarCompras() {
-    fetch('http://127.0.0.1:8009/compras')
+    fetch('http://127.0.0.1:8000/compras')
     .then(response => response.json())
     .then(data => {
         const comprasList = document.getElementById('comprasList');

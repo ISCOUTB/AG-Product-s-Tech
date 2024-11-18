@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    fetch('http://127.0.0.1:8009/historial', {
+    fetch('http://127.0.0.1:8000/historial', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Función para eliminar todos los eventos
   deleteBtn.addEventListener("click", function() {
-    fetch('http://127.0.0.1:8009/historial', {
+    fetch('http://127.0.0.1:8000/historial', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Función para cargar el historial desde la API
   function cargarHistorial() {
-    fetch('http://127.0.0.1:8009/historial')
+    fetch('http://127.0.0.1:8000/historial')
     .then(response => response.json())
     .then(data => {
       historial.innerHTML = ''; // Limpiar la lista actual

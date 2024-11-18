@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS usuarios (
     Id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_completo VARCHAR(255) NOT NULL,
     nick VARCHAR(50) NOT NULL UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS marcas (
     pais_origen VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Producto (
+CREATE TABLE IF NOT EXISTS productos (
     Id_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     Nombre VARCHAR(255) NOT NULL,
     Categoria VARCHAR(255) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS categoria (
 CREATE TABLE IF NOT EXISTS inventario (
     Id_inventario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     Id_producto INT NOT NULL,
-    FOREIGN KEY (Id_producto) REFERENCES Producto(Id_producto),
+    FOREIGN KEY (Id_producto) REFERENCES productos(Id_producto),
     cantidad_stock INT NOT NULL,
     Ubicacion_producto VARCHAR(255) NOT NULL
 );
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS proveedor (
     Direccion TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Clientes (
+CREATE TABLE IF NOT EXISTS clientes (
     Id_cliente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -58,6 +58,29 @@ CREATE TABLE IF NOT EXISTS pedido (
     fecha_pedido DATE NOT NULL,
     fecha_entrega DATE NOT NULL,
     Id_cliente INT NOT NULL,
-    FOREIGN KEY (Id_cliente) REFERENCES Clientes(Id_cliente),
+    FOREIGN KEY (Id_cliente) REFERENCES clientes(Id_cliente),
     estado_pedido VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ventas (
+    Id_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Id_producto INT NOT NULL,
+    Cantidad INT NOT NULL,
+    Fecha DATE NOT NULL,
+    FOREIGN KEY (Id_producto) REFERENCES productos(Id_producto)
+);
+
+CREATE TABLE IF NOT EXISTS compras (
+    Id_compra INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Id_producto INT NOT NULL,
+    Cantidad INT NOT NULL,
+    Fecha DATE NOT NULL,
+    FOREIGN KEY (Id_producto) REFERENCES productos(Id_producto)
+);
+
+CREATE TABLE IF NOT EXISTS informes (
+    Id_informe INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Titulo VARCHAR(255) NOT NULL,
+    Contenido TEXT NOT NULL,
+    Fecha DATE NOT NULL
 );

@@ -2,19 +2,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerBtn = document.getElementById('register');
 
     registerBtn.addEventListener('click', function() {
-        const fullName = document.querySelector('.sign-up input[placeholder="Nombre Completo"]').value;
-        const username = document.querySelector('.sign-up input[placeholder="Nombre de usuario"]').value;
-        const email = document.querySelector('.sign-up input[placeholder="Email"]').value;
-        const password = document.querySelector('.sign-up input[placeholder="Contraseña"]').value;
-
+        const fullName = document.querySelector('.sign-up input[placeholder="Nombre Completo"]').value.trim();
+        const username = document.querySelector('.sign-up input[placeholder="Nombre de usuario"]').value.trim();
+        const email = document.querySelector('.sign-up input[placeholder="Email"]').value.trim();
+        const password = document.querySelector('.sign-up input[placeholder="Contraseña"]').value.trim();
+    
+        if (!fullName || !username || !email || !password) {
+            alert('Por favor, complete todos los campos.');
+            return;
+        }
+    
         const data = {
-            full_name: fullName,
-            username: username,
+            nombre_completo: fullName,
+            nick: username,
             email: email,
-            password: password
+            contrasena: password
         };
 
-        fetch('http://127.0.0.1:8009/register/', {
+        fetch('http://127.0.0.1:8000/usuarios/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'menu.html';
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Error al registrar: ' + error.message);
+            console.error('Error completo:', JSON.stringify(error));
+            alert('Error al registrar: ' + JSON.stringify(error));
         });
     });
 });
