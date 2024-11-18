@@ -69,73 +69,27 @@ def execute_query(query: str, params: tuple = ()):
 def execute_non_query(query: str, params: tuple = ()):
     try:
         connection = get_mysql_conn()
-        if connection is None:
-            raise ConnectionError("Failed to connect to the database")
-        
         cursor = connection.cursor()
         cursor.execute(query, params)
         connection.commit()
-    
-    except ConnectionError as ce:
-        print(f"Connection error: {ce}")
-        raise
-
-    except mysql.connector.ProgrammingError as pe:
-        print(f"Programming error: {pe}")
-        raise
-
-    except mysql.connector.DataError as de:
-        print(f"Data error: {de}")
-        raise
-
-    except mysql.connector.DatabaseError as db:
-        print(f"Database error: {db}")
-        raise
-
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        raise
-
+    except Error as e:
+        print(f"Error: {e}")
     finally:
-        if 'cursor' in locals() and cursor:
+        if connection and connection.is_connected():
             cursor.close()
-        if 'connection' in locals() and connection and connection.is_connected():
             connection.close()
-
 
 def execute_scalar(query: str, params: tuple = ()):
     try:
         connection = get_mysql_conn()
-        if connection is None:
-            raise ConnectionError("Failed to connect to the database")
-        
         cursor = connection.cursor()
         cursor.execute(query, params)
         result = cursor.fetchone()
         return result[0] if result else None
-
-    except ConnectionError as ce:
-        print(f"Connection error: {ce}")
-        raise
-
-    except mysql.connector.ProgrammingError as pe:
-        print(f"Programming error: {pe}")
-        raise
-
-    except mysql.connector.DataError as de:
-        print(f"Data error: {de}")
-        raise
-
-    except mysql.connector.DatabaseError as db:
-        print(f"Database error: {db}")
-        raise
-
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
-        raise
-
+    except Error as e:
+        print(f"Error: {e}")
+        return None
     finally:
-        if 'cursor' in locals() and cursor:
+        if connection and connection.is_connected():
             cursor.close()
-        if 'connection' in locals() and connection and connection.is_connected():
             connection.close()
