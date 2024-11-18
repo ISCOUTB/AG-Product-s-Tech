@@ -32,46 +32,110 @@ def execute_query(query: str, params: tuple = ()):
     try:
         connection = get_mysql_conn()
         if connection is None:
-            raise Exception("Failed to connect to the database")
+            raise ConnectionError("Failed to connect to the database")
+        
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query, params)
         result = cursor.fetchall()
         return result
-    except Error as e:
-        print(f"Error: {e}")
+    
+    except ConnectionError as ce:
+        print(f"Connection error: {ce}")
+        raise
+    
+    except mysql.connector.ProgrammingError as pe:
+        print(f"Programming error: {pe}")
+        raise
+    
+    except mysql.connector.DataError as de:
+        print(f"Data error: {de}")
+        raise
+
+    except mysql.connector.DatabaseError as db:
+        print(f"Database error: {db}")
+        raise
+    
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        raise
+    
     finally:
-        if connection and connection.is_connected():
+        if 'cursor' in locals() and cursor:
             cursor.close()
+        if 'connection' in locals() and connection and connection.is_connected():
             connection.close()
+
 
 def execute_non_query(query: str, params: tuple = ()):
     try:
         connection = get_mysql_conn()
         if connection is None:
-            raise Exception("Failed to connect to the database")
+            raise ConnectionError("Failed to connect to the database")
+        
         cursor = connection.cursor()
         cursor.execute(query, params)
         connection.commit()
-    except Error as e:
-        print(f"Error: {e}")
+    
+    except ConnectionError as ce:
+        print(f"Connection error: {ce}")
+        raise
+
+    except mysql.connector.ProgrammingError as pe:
+        print(f"Programming error: {pe}")
+        raise
+
+    except mysql.connector.DataError as de:
+        print(f"Data error: {de}")
+        raise
+
+    except mysql.connector.DatabaseError as db:
+        print(f"Database error: {db}")
+        raise
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        raise
+
     finally:
-        if connection and connection.is_connected():
+        if 'cursor' in locals() and cursor:
             cursor.close()
+        if 'connection' in locals() and connection and connection.is_connected():
             connection.close()
+
 
 def execute_scalar(query: str, params: tuple = ()):
     try:
         connection = get_mysql_conn()
         if connection is None:
-            raise Exception("Failed to connect to the database")
+            raise ConnectionError("Failed to connect to the database")
+        
         cursor = connection.cursor()
         cursor.execute(query, params)
         result = cursor.fetchone()
         return result[0] if result else None
-    except Error as e:
-        print(f"Error: {e}")
-        return None
+
+    except ConnectionError as ce:
+        print(f"Connection error: {ce}")
+        raise
+
+    except mysql.connector.ProgrammingError as pe:
+        print(f"Programming error: {pe}")
+        raise
+
+    except mysql.connector.DataError as de:
+        print(f"Data error: {de}")
+        raise
+
+    except mysql.connector.DatabaseError as db:
+        print(f"Database error: {db}")
+        raise
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        raise
+
     finally:
-        if connection and connection.is_connected():
+        if 'cursor' in locals() and cursor:
             cursor.close()
+        if 'connection' in locals() and connection and connection.is_connected():
             connection.close()
