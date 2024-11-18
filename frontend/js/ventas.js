@@ -19,7 +19,6 @@ document.getElementById('Regresar').addEventListener('click', function() {
 // Elementos del DOM
 const ventaDescripcion = document.getElementById('ventaDescripcion');
 const btnAgregarVentaForm = document.getElementById('btnAgregarVentaForm');
-const btnActualizar = document.getElementById('btnActualizar');
 const btnEliminarVenta = document.getElementById('btnEliminarVenta');
 
 // Función para agregar una venta
